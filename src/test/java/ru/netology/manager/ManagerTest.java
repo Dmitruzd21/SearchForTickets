@@ -70,4 +70,20 @@ class ManagerTest {
         Ticket[] actual = manager.searchByFromAndTo("СDG", "LHR");
         assertArrayEquals(expected, actual);
     }
+
+    //убеждаемся, что поиск билетов происходит только при условии истинности ДВУХ условий (совпадает только From)
+    @Test
+    void shouldsearchByFromAndToIfOnlyFirstConditionIsMet() {
+        Ticket[] expected = new Ticket[]{};
+        Ticket[] actual = manager.searchByFromAndTo("KZN", "XXX");
+        assertArrayEquals(expected, actual);
+    }
+
+    //убеждаемся, что поиск билетов происходит только при условии истинности ДВУХ условий (совпадает только To)
+    @Test
+    void shouldsearchByFromAndToIfOnlySecondConditionIsMet() {
+        Ticket[] expected = new Ticket[]{};
+        Ticket[] actual = manager.searchByFromAndTo("XXX","KZN");
+        assertArrayEquals(expected, actual);
+    }
 }
