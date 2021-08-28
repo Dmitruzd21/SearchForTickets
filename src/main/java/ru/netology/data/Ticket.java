@@ -1,6 +1,6 @@
 package ru.netology.data;
 
-public class Ticket {
+public class Ticket implements Comparable {
     private int id;
     private int price;
     private String from;
@@ -56,5 +56,11 @@ public class Ticket {
     }
 
     public Ticket() {
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Ticket p = (Ticket) o;
+        return this.price -p.price;
     }
 }

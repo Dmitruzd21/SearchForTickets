@@ -3,6 +3,8 @@ package ru.netology.manager;
 import ru.netology.data.Ticket;
 import ru.netology.repository.Repository;
 
+import java.util.Arrays;
+
 public class Manager {
     private Repository repository;
 
@@ -25,14 +27,7 @@ public class Manager {
         repository.findAll();
     }
 
-
-    //  В менеджере методов findAll должен претерпеть некоторые изменения: он должен принимать два параметра:
-    //  from - аэропорта вылета
-    // to - аэропорт прилёта
-    // Соответственно, в результате поиска возвращается массив только с теми билетами, что соответствуют условиям поиска.
-    // Кроме того, результаты должны быть отсортированы по цене (от меньшей к большей).
-
-    public Ticket[] searchByFromAndTo(String from,String to) {
+    public Ticket[] searchByFromAndTo(String from, String to) {
         Ticket[] result = new Ticket[0];
         for (Ticket ticket : repository.findAll()) {
             if (matches(ticket, from, to)) {
@@ -43,14 +38,16 @@ public class Manager {
                 result = tmp;
             }
         }
+        Arrays.sort(result);
         return result;
     }
 
-    public boolean matches(Ticket ticket, String search1,String search2) {
-            if (ticket.getFrom().contains(search1) && ticket.getTo().contains(search2)) {
-                return true;
-            }
-            return false;
+    public boolean matches(Ticket ticket, String search1, String search2) {
+        if (ticket.getFrom().contains(search1) && ticket.getTo().contains(search2)) {
+            return true;
         }
+        return false;
+    }
+
 
 }
