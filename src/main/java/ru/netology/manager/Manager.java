@@ -4,6 +4,7 @@ import ru.netology.data.Ticket;
 import ru.netology.repository.Repository;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Manager {
     private Repository repository;
@@ -27,7 +28,7 @@ public class Manager {
         repository.findAll();
     }
 
-    public Ticket[] searchByFromAndTo(String from, String to) {
+    public Ticket[] searchByFromAndTo(String from, String to, Comparator <Ticket> comparator) {
         Ticket[] result = new Ticket[0];
         for (Ticket ticket : repository.findAll()) {
             if (matches(ticket, from, to)) {
@@ -38,7 +39,7 @@ public class Manager {
                 result = tmp;
             }
         }
-        Arrays.sort(result);
+        Arrays.sort(result,comparator);
         return result;
     }
 
